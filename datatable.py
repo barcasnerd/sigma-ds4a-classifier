@@ -63,8 +63,7 @@ sidebar = html.Div(
         dbc.Nav(
             [
                 dbc.NavLink("Entry", href="/", active="exact"),
-                dbc.NavLink("Suggestions", href="/page-1", active="exact"),
-                dbc.NavLink("Overview", href="/page-2", active="exact"),
+                dbc.NavLink("Help", href="/help", active="exact")
             ],
             vertical=True,
             pills=True,
@@ -88,8 +87,8 @@ description_input = dbc.FormGroup(
     [
         dbc.Label("Insert a description", html_for="example-email-row", width=5, ),
         dbc.Col(
-            dbc.Input(
-                type="text", 
+            dbc.Textarea(
+                ##type="text", 
                 id="description-entry", 
                 placeholder="Description...",
                 className="border border-secondary border-top-0 border-right-0 border-left-0 rounded-0",
@@ -105,8 +104,8 @@ ticket_input = dbc.FormGroup(
     [
         dbc.Label("Ticket number", html_for="example-password-row", width=5,),
         dbc.Col(
-            dbc.Input(
-                type="text",
+            dbc.Textarea(
+                ##type="text",
                 id="ticker-entry",
                 placeholder="Ticket...",
                 className="border border-secondary border-top-0 border-right-0 border-left-0 rounded-0",
@@ -129,8 +128,7 @@ ticket_solver=html.Div(
                             [
                                 html.Div(
                                     [
-                                        html.H4("Ticket Solver", className="d-inline"),
-                                        html.P("Help",className="text-primary d-inline"), 
+                                        html.H4("Ticket Solver", className="d-inline")
                                     ],
                                     className="card-title d-flex justify-content-between mb-0",
                                 ),
@@ -143,37 +141,19 @@ ticket_solver=html.Div(
                                 )
                             ],
                         ),
-                        description_input,
-                        html.Hr(style={"border":"0","border-top":"1px solid #E2EBEB",}),
-                        ticket_input,
-                        html.Hr(style={"border":"0","border-top":"1px solid #E2EBEB",}),
-                        html.Div(
-                            [
-                                html.P("Level of Confidence", className=" d-inline"),
-                                html.P("None", className="font-weight-light d-inline"),
-                            ],
-                             className="d-flex justify-content-between",
-                        ),
-                        html.Hr(style={"border":"0","border-top":"1px solid #E2EBEB",}),
-                        html.Div(
-                            [
-                                html.P("Chatbot", className=" d-inline"),
-                                html.P("None", className="font-weight-light d-inline"),
-                            ],
-                             className="d-flex justify-content-between",
-                        ),
+                        description_input
                     ]
                 ),
                 className="p-3 rounded mb-4",
             ),
              html.Div(
                  [
-                     dbc.Button("Classify and Solve", color="primary", className="mr-1 w-50", style={"border-radius":"20px"}),
+                     dbc.Button("Classify and Solve", href="/suggestions", color="primary", className="mr-1 w-50", style={"border-radius":"20px"}),
                  ],
                  className="d-flex justify-content-center"
              ),
             ],
-            style={"margin":"15%", "margin-top":"8%"},
+            style={"margin":"15%", "margin-top":"15%"},
         ),
     ]
 )
@@ -503,17 +483,17 @@ suggestions=html.Div(
 )
 def render_page_content(pathname):
     if pathname == "/":
+        dcc.Location
         return [ticket_solver]
 
-    elif pathname == "/page-1":
+    elif pathname == "/suggestions":
         return [suggestions]
 
-    elif pathname == "/page-2":
-        return [overview]
+
     # If the user tries to reach a different page, return a 404 message
     return dbc.Jumbotron(
         [
-            html.H1("404: Not found", className="text-danger"),
+            html.H1("404: Not found", className="text-dark"),
             html.Hr(),
             html.P(f"The pathname {pathname} was not recognised..."),
         ]
@@ -521,5 +501,5 @@ def render_page_content(pathname):
 
 
 if __name__=='__main__':
-    app.run_server(debug=True, port=3000)
+    app.run_server(debug=True, port=3500)
 
