@@ -6,9 +6,7 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 import pandas as pd
 
-# data source: https://www.kaggle.com/chubak/iranian-students-from-1968-to-2017
-# data owner: Chubak Bidpaa
-df = pd.read_csv('https://raw.githubusercontent.com/Coding-with-Adam/Dash-by-Plotly/master/Bootstrap/Side-Bar/iranian_students.csv')
+# manage 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
