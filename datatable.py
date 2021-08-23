@@ -6,7 +6,8 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 import pandas as pd
 
-# manage 
+# manage first training
+trained = False
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
