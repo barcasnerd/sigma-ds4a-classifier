@@ -5,6 +5,7 @@ import dash_core_components as dcc
 import plotly.express as px
 from dash.dependencies import Input, Output
 import pandas as pd
+import RF_new
 
 # manage first training
 trained = False
@@ -157,189 +158,190 @@ ticket_solver=html.Div(
     ]
 )
 
-overview = html.Div(
-    [
-        #title
-        html.H1("Model Overview", className="mt-2"),
 
-        #cards
-        html.Div(
-            [
-                dbc.Row(
-                    [
-                        dbc.Col(
-                            dbc.Card(
-                                dbc.CardBody(
-                                    [
-                                        html.P("Solved"),
-                                        html.H2("60"),
-                                    ],
-                                ),
-                            ),
-                        ),
-                        dbc.Col(
-                            dbc.Card(
-                                dbc.CardBody(
-                                    [
-                                        html.P("Unsolved"),
-                                        html.H2("16"),
-                                    ],
-                                ),
-                            ),
-                        ),
-                        dbc.Col(
-                            dbc.Card(
-                                dbc.CardBody(
-                                    [
-                                        html.P("Categories"),
-                                        html.H2("43"),
-                                    ],
-                                ),
-                            ),
-                        ),
-                        dbc.Col(
-                            dbc.Card(
-                                dbc.CardBody(
-                                    [
-                                        html.P("New Suggestions"),
-                                        html.H2("64"),
-                                    ],
-                                ),
-                            ),
-                        ),
-                    ]
-                )
-            ],
-            className="mt-5"
-        ),
+# overview = html.Div(
+#     [
+#         #title
+#         html.H1("Model Overview", className="mt-2"),
 
-        #plots
-        html.Div(
-            dbc.Card(
-                dbc.CardBody(
-                    [
-                        html.Div(
-                            [
-                                html.H4("Model Confidence Behavior"),
-                                html.P("This plot is using example data for frontend mockup only.")
-                            ],
-                            className="card-title"
-                        ),
-                        html.Div(
-                            dcc.Graph(id='bargraph',
-                                figure=px.bar(df, barmode='group', x='Years',
-                                y=['Girls High School', 'Boys High School']))
-                        ),
-                    ]
-                )
-            ),
-            className="mt-5"
-        ),
+#         #cards
+#         html.Div(
+#             [
+#                 dbc.Row(
+#                     [
+#                         dbc.Col(
+#                             dbc.Card(
+#                                 dbc.CardBody(
+#                                     [
+#                                         html.P("Solved"),
+#                                         html.H2("60"),
+#                                     ],
+#                                 ),
+#                             ),
+#                         ),
+#                         dbc.Col(
+#                             dbc.Card(
+#                                 dbc.CardBody(
+#                                     [
+#                                         html.P("Unsolved"),
+#                                         html.H2("16"),
+#                                     ],
+#                                 ),
+#                             ),
+#                         ),
+#                         dbc.Col(
+#                             dbc.Card(
+#                                 dbc.CardBody(
+#                                     [
+#                                         html.P("Categories"),
+#                                         html.H2("43"),
+#                                     ],
+#                                 ),
+#                             ),
+#                         ),
+#                         dbc.Col(
+#                             dbc.Card(
+#                                 dbc.CardBody(
+#                                     [
+#                                         html.P("New Suggestions"),
+#                                         html.H2("64"),
+#                                     ],
+#                                 ),
+#                             ),
+#                         ),
+#                     ]
+#                 )
+#             ],
+#             className="mt-5"
+#         ),
 
-        #more details
-        html.Div(
-            dbc.Row(
-                [
-                    #most used categories
-                    dbc.Col(
-                        dbc.Card(
-                            dbc.CardBody(
-                                [
-                                    #TITLE most used categories
-                                    html.Div(
-                                        [
-                                            html.Div(
-                                                [
-                                                    html.H4("Most Frequent Categories", className="d-inline"),
-                                                    html.P("Frequency", className="d-inline text-primary"),
-                                                ],
-                                                className="d-flex justify-content-between mb-0"
-                                            ),
-                                            html.P("Category", className="d-inline font-weight-light"),
-                                            html.P(" Name", className="d-inline"),
-                                        ],
-                                        className="card-title",
-                                    ),
+#         #plots
+#         html.Div(
+#             dbc.Card(
+#                 dbc.CardBody(
+#                     [
+#                         html.Div(
+#                             [
+#                                 html.H4("Model Confidence Behavior"),
+#                                 html.P("This plot is using example data for frontend mockup only.")
+#                             ],
+#                             className="card-title"
+#                         ),
+#                         html.Div(
+#                             dcc.Graph(id='bargraph',
+#                                 figure=px.bar(df, barmode='group', x='Years',
+#                                 y=['Girls High School', 'Boys High School']))
+#                         ),
+#                     ]
+#                 )
+#             ),
+#             className="mt-5"
+#         ),
 
-                                    #CONTENT most used categories
-                                    html.Div(
-                                        [
-                                            html.Div(
-                                                [
-                                                    html.P("Awaiting developer fix", className="d-inline"),
-                                                    html.P("4221", className="d-inline font-weight-light"),
-                                                ],
-                                                className="d-flex justify-content-between "
-                                            ),
-                                            html.Hr(style={"margin":"0px","padding":"1px"}),
-                                            html.Div(
-                                                [
-                                                    html.P("Waiting on Feature Request", className="d-inline"),
-                                                    html.P("3200", className="d-inline font-weight-light"),
-                                                ],
-                                                className="d-flex justify-content-between "
-                                            ),
-                                            html.Hr(style={"margin":"0px","padding":"1px"}),
-                                            html.Div(
-                                                [
-                                                    html.P("Awaiting Customer Response", className="d-inline"),
-                                                    html.P("1332", className="d-inline font-weight-light"),
-                                                ],
-                                                className="d-flex justify-content-between "
-                                            ),
-                                            html.Hr(style={"margin":"0px","padding":"1px"}),
-                                            html.Div(
-                                                [
-                                                    html.P("Pending", className="d-inline"),
-                                                    html.P("421", className="d-inline font-weight-light"),
-                                                ],
-                                                className="d-flex justify-content-between "
-                                            ),
-                                        ],
-                                        className="mt-3",
-                                    ),
+#         #more details
+#         html.Div(
+#             dbc.Row(
+#                 [
+#                     #most used categories
+#                     dbc.Col(
+#                         dbc.Card(
+#                             dbc.CardBody(
+#                                 [
+#                                     #TITLE most used categories
+#                                     html.Div(
+#                                         [
+#                                             html.Div(
+#                                                 [
+#                                                     html.H4("Most Frequent Categories", className="d-inline"),
+#                                                     html.P("Frequency", className="d-inline text-primary"),
+#                                                 ],
+#                                                 className="d-flex justify-content-between mb-0"
+#                                             ),
+#                                             html.P("Category", className="d-inline font-weight-light"),
+#                                             html.P(" Name", className="d-inline"),
+#                                         ],
+#                                         className="card-title",
+#                                     ),
 
-                                ]
-                            ),
-                        ),
-                    ),
+#                                     #CONTENT most used categories
+#                                     html.Div(
+#                                         [
+#                                             html.Div(
+#                                                 [
+#                                                     html.P("Awaiting developer fix", className="d-inline"),
+#                                                     html.P("4221", className="d-inline font-weight-light"),
+#                                                 ],
+#                                                 className="d-flex justify-content-between "
+#                                             ),
+#                                             html.Hr(style={"margin":"0px","padding":"1px"}),
+#                                             html.Div(
+#                                                 [
+#                                                     html.P("Waiting on Feature Request", className="d-inline"),
+#                                                     html.P("3200", className="d-inline font-weight-light"),
+#                                                 ],
+#                                                 className="d-flex justify-content-between "
+#                                             ),
+#                                             html.Hr(style={"margin":"0px","padding":"1px"}),
+#                                             html.Div(
+#                                                 [
+#                                                     html.P("Awaiting Customer Response", className="d-inline"),
+#                                                     html.P("1332", className="d-inline font-weight-light"),
+#                                                 ],
+#                                                 className="d-flex justify-content-between "
+#                                             ),
+#                                             html.Hr(style={"margin":"0px","padding":"1px"}),
+#                                             html.Div(
+#                                                 [
+#                                                     html.P("Pending", className="d-inline"),
+#                                                     html.P("421", className="d-inline font-weight-light"),
+#                                                 ],
+#                                                 className="d-flex justify-content-between "
+#                                             ),
+#                                         ],
+#                                         className="mt-3",
+#                                     ),
 
-                    #add more categories
-                    dbc.Col(
-                        dbc.Card(
-                            dbc.CardBody(
-                                [
-                                    #TITLE add more categories
-                                    html.Div(
-                                        [
-                                            html.Div(
-                                                [
-                                                    html.H4("Card title", className="d-inline"),
-                                                    html.P("Help", className="d-inline text-primary"),
-                                                ],
-                                                className="d-flex justify-content-between mb-0"
-                                            ),
-                                            html.P("Access:", className="d-inline font-weight-light"),
-                                            html.P(" Solo personal autorizado", className="d-inline"),
-                                        ],
-                                        className="card-title",
-                                    ),
+#                                 ]
+#                             ),
+#                         ),
+#                     ),
 
-                                    # CONTENT add more categories
-                                    html.Div(
-                                        dbc.Button("Click here to Login", color="primary", className="mr-1 w-50", style={"border-radius":"20px"}),
-                                        className="d-flex justify-content-center"
-                                    ),
-                                ]
-                            ),
-                        ),
-                    ),
-                ]
-            ),
-            className="mt-5"
-        ),
-    ]
-)
+#                     #add more categories
+#                     dbc.Col(
+#                         dbc.Card(
+#                             dbc.CardBody(
+#                                 [
+#                                     #TITLE add more categories
+#                                     html.Div(
+#                                         [
+#                                             html.Div(
+#                                                 [
+#                                                     html.H4("Card title", className="d-inline"),
+#                                                     html.P("Help", className="d-inline text-primary"),
+#                                                 ],
+#                                                 className="d-flex justify-content-between mb-0"
+#                                             ),
+#                                             html.P("Access:", className="d-inline font-weight-light"),
+#                                             html.P(" Solo personal autorizado", className="d-inline"),
+#                                         ],
+#                                         className="card-title",
+#                                     ),
+
+#                                     # CONTENT add more categories
+#                                     html.Div(
+#                                         dbc.Button("Click here to Login", color="primary", className="mr-1 w-50", style={"border-radius":"20px"}),
+#                                         className="d-flex justify-content-center"
+#                                     ),
+#                                 ]
+#                             ),
+#                         ),
+#                     ),
+#                 ]
+#             ),
+#             className="mt-5"
+#         ),
+#     ]
+# )
 
 
 suggestions=html.Div(
@@ -482,7 +484,10 @@ suggestions=html.Div(
 )
 def render_page_content(pathname):
     if pathname == "/":
-        dcc.Location
+        if trained == False:
+            loc = "descripciones_tickets_preprocess.csv"
+            model = RF_new.model_classifier(loc)
+            trained = True
         return [ticket_solver]
 
     elif pathname == "/suggestions":
@@ -497,6 +502,7 @@ def render_page_content(pathname):
             html.P(f"The pathname {pathname} was not recognised..."),
         ]
     )
+
 
 
 if __name__=='__main__':

@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,9 +6,6 @@ from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer, T
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-
-
-# In[7]:
 
 
 def model_classifier(loc):
@@ -51,9 +42,6 @@ def model_classifier(loc):
     return classifier
 
 
-# In[4]:
-
-
 def transform_data(loc, data):
     """Función para transformar datos. Debe ser un arreglo iterable
     
@@ -79,9 +67,6 @@ def transform_data(loc, data):
     vectorizer.fit(X_train)
     data = vectorizer.transform(data)
     return data    
-
-
-# In[20]:
 
 
 def make_pred(loc, new_data, classifier):

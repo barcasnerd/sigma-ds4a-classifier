@@ -2,5 +2,7 @@ dash-bootstrap-components==0.13.0
 dash==1.21.0
 pandas==1.3.1
 gunicorn==20.0.4
-
+sklearn
+seaborn
+matplotlib
 
