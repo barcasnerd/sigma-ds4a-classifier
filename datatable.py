@@ -220,7 +220,7 @@ def render_page_content(pathname, data):
         # model intervention
         loc = "descripciones_tickets_preprocess.csv"
         print("csv saved")
-        model =  joblib.load("./random_forest2.joblib")
+        model =  joblib.load("./model.joblib")
         print("model saved")
         description = data.get("description")
         print(f"{description} saved")
@@ -385,4 +385,4 @@ def render_page_content(pathname, data):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=3500)
+    app.run_server(debug=True, port=8080, host="0.0.0.0")
