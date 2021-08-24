@@ -8,7 +8,7 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import RF_new
 import joblib
-
+import flask
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
@@ -385,4 +385,4 @@ def render_page_content(pathname, data):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8080, host="0.0.0.0")
+    app.run_server(debug=False, port=8080, host="0.0.0.0")
