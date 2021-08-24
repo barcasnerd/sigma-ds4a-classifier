@@ -27,9 +27,7 @@ SIDEBAR_STYLE = {
     "color": "#E2EBEB",
 }
 
-# model intervention
-loc = "descripciones_tickets_preprocess.csv"
-model = RF_new.model_classifier(loc)
+
 
 # padding for the page content
 CONTENT_STYLE = {
@@ -188,7 +186,9 @@ def render_page_content(pathname, data):
         return [ticket_solver]
 
     elif pathname == "/suggestions":
-        global loc, model
+        # model intervention
+        loc = "descripciones_tickets_preprocess.csv"
+        model = RF_new.model_classifier(loc)
         description = data.get("description")
         df = RF_new.make_pred(loc, [description], model)
 
