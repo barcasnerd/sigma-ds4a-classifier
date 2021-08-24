@@ -8,9 +8,7 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import RF_new
 
-# manage first training
-#loc = "descripciones_tickets_preprocess.csv"
-#model = RF_new.model_classifier(loc)
+
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -28,6 +26,10 @@ SIDEBAR_STYLE = {
     "background-color": "#30454C",
     "color": "#E2EBEB",
 }
+
+# model intervention
+loc = "descripciones_tickets_preprocess.csv"
+model = RF_new.model_classifier(loc)
 
 # padding for the page content
 CONTENT_STYLE = {
@@ -94,30 +96,11 @@ description_input = dbc.FormGroup(
     row=True,
 )
 
-# modal
-modal = dbc.Modal(
-    [
-        dbc.ModalHeader("Classifier"),
-        dbc.ModalBody(
-            "The model will give you a prediction in a while, it could take a few minutes."),
-        dbc.ModalFooter(
-            dbc.Button(
-                "Close",
-                id="close",
-                href="/help",
-                className="ml-auto",
-                n_clicks=0
-            )
-        ),
-    ],
-    id="modal",
-    is_open=False,
-)
 
 # main page
 ticket_solver = html.Div(
     [
-        
+
         html.Div([
             dbc.Card(
                 dbc.CardBody(
@@ -166,74 +149,6 @@ ticket_solver = html.Div(
 )
 
 
-suggestions = html.Div(
-    [
-        # section title
-        html.H1("Suggested Solutions", className="mb-4"),
-
-        # suggestions
-        html.Div(
-            [
-                # CARD
-                dbc.Card(
-                    # cuerpo de la Card
-                    dbc.CardBody(
-                        [
-                            # TITULO DE LA CARD
-                            html.Div([
-                                html.H5("Model Suggestions"),
-                                html.P(
-                                    "This is a list of the top 5 best suggestions to solve the problem", className="font-wight-light"),
-                            ]),
-
-                            # TABLA DE SUGERENCIAS
-                            dbc.Table(
-                                [
-                                    html.Thead(
-                                        html.Tr(
-                                            [
-                                                html.Th(
-                                                    html.P(
-                                                        "Solution", className="font-wight-light"),
-                                                    className="font-weight-light pb-0",
-                                                ),
-                                                html.Th(
-                                                    html.P(
-                                                        "Predicted Category", className="font-wight-light"),
-                                                    className="font-weight-light pb-0",
-                                                ),
-                                                html.Th(
-                                                    html.P(
-                                                        "Confidence Level", className="font-wight-light"),
-                                                    className="font-weight-light pb-0",
-                                                ),
-                                            ],
-                                            className="mb-0",
-                                            style={"margin-bottom": "1px",
-                                                   "padding": "0px"},
-                                        ),
-                                    ),
-
-                                    # RESULTADOS DE LA PREDICCIÓN
-                                    html.Tbody(
-                                        id="suggestion-result", children=[]),
-                                ],
-                                bordered=False,
-                            ),
-
-
-                        ],
-                        className=""
-                    ),
-                ),
-            ],
-            className=""
-        ),
-
-    ],
-    className=""
-)
-
 help_window = html.Div(id="help-window", children="help window")
 
 # content accesor
@@ -251,13 +166,15 @@ app.layout = html.Div([
 # store description to session until change
 @app.callback(Output('memory', 'data'),
               Input('description-entry', 'value'),
-              State('memory', 'data'))            
+              State('memory', 'data'))
 def saveDescription(desc, data):
     if desc is None:
         raise PreventUpdate
     data = data or {'description': ""}
     data['description'] = desc
     return data
+
+# render components
 
 
 @app.callback(
@@ -266,13 +183,156 @@ def saveDescription(desc, data):
     [State("memory", "data")]
 )
 def render_page_content(pathname, data):
-    
+
     if pathname == "/":
         return [ticket_solver]
 
     elif pathname == "/suggestions":
-        print(data)
-        return [suggestions, html.P(data.get("description"))]
+        global loc, model
+        description = data.get("description")
+        df = RF_new.make_pred(loc, [description], model)
+
+        categories = []
+
+
+        for i in range(0, 2):
+            key = df.iloc[i].name
+            value = df.iloc[i][0]*100
+
+            if value <= 30:
+                confidence = 'Low'
+                color = 'bg-danger'
+            elif value > 30 and value <= 70:
+                confidence = 'Normal'
+                color = 'bg-warnign'
+            else:
+                confidence = 'High'
+                color = 'bg-success'
+
+            sub = [key, value, confidence, color]
+            categories.append(sub)
+
+        return [html.Div(
+            [
+                # section title
+                html.H1("Suggested Solutions", className="mb-4"),
+
+                # suggestions
+                html.Div(
+                    [
+                        # CARD
+                        dbc.Card(
+                            # cuerpo de la Card
+                            dbc.CardBody(
+                                [
+                                    # TITULO DE LA CARD
+                                    html.Div([
+                                        html.H5("Model Suggestions"),
+                                        html.P(
+                                            "This is a list of the top 3 best suggestions to solve the problem", className="font-wight-light"),
+                                    ]),
+
+                                    # TABLA DE SUGERENCIAS
+                                    dbc.Table(
+                                        [
+                                            html.Thead(
+                                                html.Tr(
+                                                    [
+                                                        html.Th(
+                                                            html.P(
+                                                                "Category", className="font-wight-light"),
+                                                            className="font-weight-light pb-0",
+                                                        ),
+                                                        html.Th(
+                                                            html.P(
+                                                                "Probability", className="font-wight-light"),
+                                                            className="font-weight-light pb-0",
+                                                        ),
+                                                        html.Th(
+                                                            html.P(
+                                                                "Confidence Level", className="font-wight-light"),
+                                                            className="font-weight-light pb-0",
+                                                        ),
+                                                    ],
+                                                    className="mb-0",
+                                                    style={"margin-bottom": "1px",
+                                                           "padding": "0px"},
+                                                ),
+                                            ),
+
+                                            # RESULTADOS DE LA PREDICCIÓN
+                                            html.Tbody(
+                                                [
+                                                    html.Tr(
+                                                        [
+                                                            html.Td(
+                                                                f"{categories[0][0]}"),
+                                                            html.Td(f"{categories[0][1]}%"),
+                                                            html.Td(
+                                                                [
+                                                                    html.Div(
+                                                                        html.P(
+                                                                            f"{categories[0][2]}"),
+                                                                        className=f"text-light rounded {categories[0][3]} w-50 justify-content-center"
+                                                                    ),
+                                                                ],
+                                                            ),
+                                                        ],
+                                                    ),
+                                                    html.Tr(
+                                                        [
+                                                            html.Td(
+                                                                f"{categories[1][0]}"),
+                                                            html.Td(f"{categories[1][1]}%"),
+                                                            html.Td(
+                                                                [
+                                                                    html.Div(
+                                                                        html.P(
+                                                                            f"{categories[1][2]}"),
+                                                                        className=f"text-light rounded {categories[0][3]} w-50 justify-content-center"
+                                                                    ),
+                                                                ],
+                                                            ),
+                                                        ],
+                                                    ),
+                                                    html.Tr(
+                                                        [
+                                                            html.Td(
+                                                                f"{categories[2][0]}"),
+                                                            html.Td(f"{categories[2][1]}"),
+                                                            html.Td(
+                                                                [
+                                                                    html.Div(
+                                                                        html.P(
+                                                                            f"{categories[2][2]}"),
+                                                                        className=f"text-light rounded {categories[2][3]} w-50 justify-content-center"
+                                                                    ),
+                                                                ],
+                                                            ),
+                                                        ],
+                                                    ),
+                                                ],
+                                                className=""
+                                            )
+
+                                            # Fin de resultados
+                                        ],
+                                        bordered=False,
+                                    ),
+
+
+                                ],
+                                className=""
+                            ),
+                        ),
+                    ],
+                    className=""
+                ),
+
+            ],
+            className=""
+        )
+        ]
 
     elif pathname == "/help":
         return [help_window]
