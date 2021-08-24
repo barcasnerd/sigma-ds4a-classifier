@@ -7,8 +7,7 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import pandas as pd
 import RF_new
-
-
+import joblib
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -26,7 +25,6 @@ SIDEBAR_STYLE = {
     "background-color": "#30454C",
     "color": "#E2EBEB",
 }
-
 
 
 # padding for the page content
@@ -95,10 +93,31 @@ description_input = dbc.FormGroup(
 )
 
 
+# modal information
+modal = html.Div(
+    [
+        dbc.Modal(
+            [
+                dbc.ModalHeader("Warning!"),
+                dbc.ModalBody(
+                    "The suggestion could take a few minutes while is working into predict a solution. Please press close and stay"),
+                dbc.ModalFooter(
+                    dbc.Button(
+                        "Close", id="close", className="ml-auto", n_clicks=0, href="/suggestions"
+                    )
+                ),
+            ],
+            id="modal",
+            is_open=False,
+        ),
+    ]
+)
+
+
 # main page
 ticket_solver = html.Div(
     [
-
+        modal,
         html.Div([
             dbc.Card(
                 dbc.CardBody(
@@ -135,7 +154,6 @@ ticket_solver = html.Div(
                                color="primary",
                                className="mr-1 w-50",
                                n_clicks=0,
-                               href="/suggestions",
                                style={"border-radius": "20px"}),
                 ],
                 className="d-flex justify-content-center"
@@ -172,7 +190,20 @@ def saveDescription(desc, data):
     data['description'] = desc
     return data
 
+
+@app.callback(
+    Output("modal", "is_open"),
+    [Input("submit-val", "n_clicks"), Input("close", "n_clicks")],
+    [State("modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
+
 # render components
+
 
 
 @app.callback(
@@ -188,14 +219,17 @@ def render_page_content(pathname, data):
     elif pathname == "/suggestions":
         # model intervention
         loc = "descripciones_tickets_preprocess.csv"
-        model = RF_new.model_classifier(loc)
+        print("csv saved")
+        model =  joblib.load("./random_forest2.joblib")
+        print("model saved")
         description = data.get("description")
+        print(f"{description} saved")
         df = RF_new.make_pred(loc, [description], model)
+        print("df saved")
 
         categories = []
 
-
-        for i in range(0, 2):
+        for i in range(0, 3):
             key = df.iloc[i].name
             value = df.iloc[i][0]*100
 
@@ -204,8 +238,8 @@ def render_page_content(pathname, data):
                 color = 'bg-danger'
             elif value > 30 and value <= 70:
                 confidence = 'Normal'
-                color = 'bg-warnign'
-            else:
+                color = 'bg-warning'
+            elif value > 70:
                 confidence = 'High'
                 color = 'bg-success'
 
@@ -267,7 +301,8 @@ def render_page_content(pathname, data):
                                                         [
                                                             html.Td(
                                                                 f"{categories[0][0]}"),
-                                                            html.Td(f"{categories[0][1]}%"),
+                                                            html.Td(
+                                                                f"{categories[0][1]}%"),
                                                             html.Td(
                                                                 [
                                                                     html.Div(
@@ -283,7 +318,8 @@ def render_page_content(pathname, data):
                                                         [
                                                             html.Td(
                                                                 f"{categories[1][0]}"),
-                                                            html.Td(f"{categories[1][1]}%"),
+                                                            html.Td(
+                                                                f"{categories[1][1]}%"),
                                                             html.Td(
                                                                 [
                                                                     html.Div(
@@ -299,7 +335,8 @@ def render_page_content(pathname, data):
                                                         [
                                                             html.Td(
                                                                 f"{categories[2][0]}"),
-                                                            html.Td(f"{categories[2][1]}"),
+                                                            html.Td(
+                                                                f"{categories[2][1]}%"),
                                                             html.Td(
                                                                 [
                                                                     html.Div(
@@ -328,7 +365,7 @@ def render_page_content(pathname, data):
                     ],
                     className=""
                 ),
-
+                dbc.Button("Back", color="primary", block=True, href="/", className="pt-2")
             ],
             className=""
         )
