@@ -325,7 +325,7 @@ def render_page_content(pathname, data):
                                                                     html.Div(
                                                                         html.P(
                                                                             f"{categories[1][2]}"),
-                                                                        className=f"text-light rounded {categories[0][3]} w-50 justify-content-center"
+                                                                        className=f"text-light rounded {categories[1][3]} w-50 justify-content-center"
                                                                     ),
                                                                 ],
                                                             ),
