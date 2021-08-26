@@ -1,13 +1,82 @@
 import dash
 import dash_bootstrap_components as dbc
+from dash_bootstrap_components._components.CardHeader import CardHeader
 import dash_html_components as html
 import dash_core_components as dcc
 import plotly.express as px
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
+mkd_string="""
+|                     |                                                           |
+|---------------------|-----------------------------------------------------------|
+|   App               | No envia el backup de aplicación movil                    |
+|                     | No cargan los datos correctamente en la aplicación        |
+|                     | No inicia sesion en aplicación movil                      |
+|                     | Subir aplicación móvil app a play store                   |
+| Consultas           | Revisión de Consultas                                     |
+| Datos               | Cambiar datos por BD                                      |
+|                     | Carga de datos masiva                                     |
+|                     | Datos erroneos en BI                                      |
+|                     | Datos erroneos en Cubo                                    |
+| Formulario          | No carga un formulario                                    |
+|                     | Calculo erroneo en formulario                             |
+|                     | Formulario no guarda, no edita y o no elimina             |
+|                     | Configuración de nuevo campo                              |
+|                     | No busca ni filtra en formulario                          |
+| Funcionalidad       | Adición o modificación de funcionalidad en perfil         |
+|                     | Capacitacion de modulo o funcionalidad                    |
+|                     | Implantación módulo o nueva funcionalidad                 |
+| GPS                 | Configuración de equipos GPS                              |
+|                     | No transmite GPS                                          |
+|                     | Revisión de GPS                                           |
+|                     | Saltos de GPS Descalibrado                                |
+| Nuevo requerimiento | 1- Nuevo requerimiento                                    |
+| Otros               | 0- No definido                                            |
+| Reporte             | Faltan datos en un reporte                                |
+|                     | Configuración de nuevo Reporte                            |
+|                     | Error al exportar reporte                                 |
+|                     | Datos erroneos en reporte                                 |
+|                     | No descarga reporte                                       |
+|                     | Generar reporte, informe, datos solicitado por el cliente |
+| Servicios           | Publicación de servicios, capas                           |
+|                     | Interrupcion completa del servicio                        |
+| Shape               | Generación de shape                                       |
+| Sistema             | No inicia sesion un usuario en movilidad                  |
+|                     | No carga el sistema                                       |
+|                     | Imposibilidad ingreso de un usuario                       |
+|                     | Disminucion del desempeño de plataforma                   |
+|                     | Duda en uso de plataforma                                 |
+|                     | Creación de usuarios para ingreso plataforma              |
+|                     | Sale error en movilidad al adicionar                      |
+|                     | Duda en uso de campos                                     |
+|                     | Auditoria del sistema                                     |
+| Visor               | Datos erroneos en Visor                                   |
+|                     | Configuracion de nueva capa en visor                      |
+|                     | No funciona adecuadamente widget del visor                |
+|                     | No carga el visor                                         |
+|                     | Configuracion de nuevo widget en visor                    |
+|                     | No cargan las capas en el visor                           |
+|                     | Lentitud en el visor                                      |
+
+"""
 
 
+category_table = html.Div([
+    dbc.Row([
+        dbc.Card([
+            dbc.CardHeader([
+                dbc.Row([
+                    dbc.Col(html.H5("Model Category")),
+                    dbc.Col(html.H5("Sigma Category")),
+                ]),
+            ]),
+            dbc.CardBody([
+                dcc.Markdown(mkd_string)
+            ]),
+        ]),
+    ], justify="center")
+])
 
 component = html.Div([
     html.H1("Help, Support and Information"),
@@ -98,6 +167,11 @@ component = html.Div([
             ], justify="center", className="mt-3 p-3", style={"padding": "2%"}),            
 
         ],),
+    ]),
+
+    html.Div([
+         html.H4("Category Modeling Table", className="", style={"padding-top": "1.5%", "padding-bottom":"2%"}),
+        category_table,
     ]),
 
 ])

@@ -9,6 +9,8 @@ import ContactUsComponent
 import joblib
 import  RF_new 
 
+
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
@@ -58,7 +60,7 @@ sidebar = html.Div(
         ),
         dbc.Nav(
             [
-                dbc.NavLink("Entry", href="/", active="exact"),
+                dbc.NavLink("Home", href="/", active="exact"),
                 dbc.NavLink("Help", href="/help", active="exact"),
                 dbc.NavLink("Contact Us", href="/contact", active="exact"),
             ],
