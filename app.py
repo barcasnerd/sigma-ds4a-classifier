@@ -5,8 +5,10 @@ import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import HelpComponent
+import ContactUsComponent
 import joblib
 import  RF_new 
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
@@ -38,18 +40,13 @@ LOGO_STYLE = {
 
 
 # logo component
-logo = html.Div(
-    [
-        dbc.Row(
-            [
-                dbc.Col(html.H2("SIGMA", className="display-4"),
-                        style={"padding-left": "20px", "padding-right": "7px", }),
-                dbc.Col(dbc.Spinner(color="primary", type="grow"), style={
-                        "padding-top": "20px", "pading-left": "3px"}),
-            ]
-        )
-    ],
-)
+logo = html.Div([
+    html.Img(src="https://www.sigmaingenieria.com.co/wp-content/themes/sigma_theme/imgs/logo.png"),
+])
+
+footer = html.Div([
+    html.Img(src="https://storage.googleapis.com/training-internal-assets/Colombia_Logo.png", style={"max-width":"80%"})
+], className="fixed-bottom m-1", style={"max-width":"80%"})
 
 # sidebar component
 sidebar = html.Div(
@@ -62,11 +59,13 @@ sidebar = html.Div(
         dbc.Nav(
             [
                 dbc.NavLink("Entry", href="/", active="exact"),
-                dbc.NavLink("Help", href="/help", active="exact")
+                dbc.NavLink("Help", href="/help", active="exact"),
+                dbc.NavLink("Contact Us", href="/contact", active="exact"),
             ],
             vertical=True,
             pills=True,
         ),
+        footer,
     ],
     style=SIDEBAR_STYLE,
 )
@@ -163,6 +162,7 @@ ticket_solver = html.Div(
 
 
 help_window = HelpComponent.component
+contact_window = ContactUsComponent.component
 
 # content accesor
 content = html.Div(id="page-content", children=[], style=CONTENT_STYLE)
@@ -211,6 +211,9 @@ def render_page_content(pathname, data):
 
     if pathname == "/":
         return [ticket_solver]
+
+    elif pathname == "/contact":
+        return [contact_window]
 
     elif pathname == "/suggestions":
         # model intervention

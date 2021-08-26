@@ -7,31 +7,7 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
 
-image_carrousel = dbc.Carousel(
-    items=[
-        {
-            "key": "1",
-            "src": "https://raw.githubusercontent.com/barcasnerd/sigma-ds4a-classifier/jair-changes/images/insert_text.jpg",
-            "header": "Step 1 ",
-            "caption": "Enter the text corresponding to the ticket on the initial screen.",
-            "captionClassName": "bg-secondary text-light",
-        },
-        {
-            "key": "2",
-            "src": "https://raw.githubusercontent.com/barcasnerd/sigma-ds4a-classifier/jair-changes/images/warning.jpg",
-            "header": "Step 2",
-            "caption": "After entering the text, an informative message will appear where the response of the model must be awaited. Click on close and wait for the system's response",
-            "captionClassName": "bg-secondary text-light",
-        },
-        {
-            "key": "3",
-            "src": "https://raw.githubusercontent.com/barcasnerd/sigma-ds4a-classifier/jair-changes/images/suggest.jpg",
-            "header": "Step 3",
-            "caption": "The result of the prediction will correspond to the first 3 categories most coincident with the text entered, in order of accuracy",
-            "captionClassName": "bg-secondary text-light",
-        },
-    ], className="text-dark bg-dark"
-)
+
 
 component = html.Div([
     html.H1("Help, Support and Information"),
