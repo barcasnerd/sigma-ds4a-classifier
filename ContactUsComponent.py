@@ -7,16 +7,101 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
 
-card_content_3 = [
-    dbc.CardImg(src="/static/images/placeholder286x180.png", top=True),
+card_content_1 = [
+    dbc.CardImg(src="https://yt3.ggpht.com/ytc/AKedOLRKG8rPQxRrz0d6zR4zQ3IpsG_PUbzz50pRI_aQxg=s900-c-k-c0x00ffffff-no-rj", top=True, className="rounded-circle"),
     dbc.CardBody(
         [
-            html.H5("Card with image", className="card-title"),
+            html.H5("Catalina Escobar", className="card-title"),
             html.P(
                 "This card has an image on top, and a button below",
                 className="card-text",
             ),
-            dbc.Button("Click me!", color="primary"),
+            dbc.Button("More Info", color="primary"),
+        ]
+    ),
+]
+
+
+card_content_2 = [
+    dbc.CardImg(src="https://yt3.ggpht.com/ytc/AKedOLRKG8rPQxRrz0d6zR4zQ3IpsG_PUbzz50pRI_aQxg=s900-c-k-c0x00ffffff-no-rj", top=True, className="rounded-circle"),
+    dbc.CardBody(
+        [
+            html.H5("Julián Martínez", className="card-title"),
+            html.P(
+                "This card has an image on top, and a button below",
+                className="card-text",
+            ),
+            dbc.Button("More Info", color="primary"),
+        ]
+    ),
+]
+
+card_content_3 = [
+    dbc.CardImg(src="https://yt3.ggpht.com/ytc/AKedOLRKG8rPQxRrz0d6zR4zQ3IpsG_PUbzz50pRI_aQxg=s900-c-k-c0x00ffffff-no-rj", top=True, className="rounded-circle"),
+    dbc.CardBody(
+        [
+            html.H5("David Puentes", className="card-title"),
+            html.P(
+                "This card has an image on top, and a button below",
+                className="card-text",
+            ),
+            dbc.Button("More Info", color="primary"),
+        ]
+    ),
+]
+
+card_content_4 = [
+    dbc.CardImg(src="https://yt3.ggpht.com/ytc/AKedOLRKG8rPQxRrz0d6zR4zQ3IpsG_PUbzz50pRI_aQxg=s900-c-k-c0x00ffffff-no-rj", top=True, className="rounded-circle"),
+    dbc.CardBody(
+        [
+            html.H5("Jair Barcasnegras", className="card-title"),
+            html.P(
+                "This card has an image on top, and a button below",
+                className="card-text",
+            ),
+            dbc.Button("More Info", color="primary"),
+        ]
+    ),
+]
+
+card_content_5 = [
+    dbc.CardImg(src="https://yt3.ggpht.com/ytc/AKedOLRKG8rPQxRrz0d6zR4zQ3IpsG_PUbzz50pRI_aQxg=s900-c-k-c0x00ffffff-no-rj", top=True, className="rounded-circle"),
+    dbc.CardBody(
+        [
+            html.H5("Raúl Arguello", className="card-title"),
+            html.P(
+                "This card has an image on top, and a button below",
+                className="card-text",
+            ),
+            dbc.Button("More Info", color="primary"),
+        ]
+    ),
+]
+
+card_content_6 = [
+    dbc.CardImg(src="https://yt3.ggpht.com/ytc/AKedOLRKG8rPQxRrz0d6zR4zQ3IpsG_PUbzz50pRI_aQxg=s900-c-k-c0x00ffffff-no-rj", top=True, className="rounded-circle"),
+    dbc.CardBody(
+        [
+            html.H5("Andrea Vásquez", className="card-title"),
+            html.P(
+                "This card has an image on top, and a button below",
+                className="card-text",
+            ),
+            dbc.Button("More Info", color="primary"),
+        ]
+    ),
+]
+
+card_content_7 = [
+    dbc.CardImg(src="https://yt3.ggpht.com/ytc/AKedOLRKG8rPQxRrz0d6zR4zQ3IpsG_PUbzz50pRI_aQxg=s900-c-k-c0x00ffffff-no-rj", top=True, className="rounded-circle"),
+    dbc.CardBody(
+        [
+            html.H5("Wilmer Garzón", className="card-title"),
+            html.P(
+                "This card has an image on top, and a button below",
+                className="card-text",
+            ),
+            dbc.Button("More Info", color="primary"),
         ]
     ),
 ]
@@ -24,14 +109,14 @@ card_content_3 = [
 
 cards = dbc.CardColumns(
     [
+        dbc.Card(card_content_1, color="light"),
+        dbc.Card(card_content_2, color="light"),
         dbc.Card(card_content_3, color="light"),
-        dbc.Card(card_content_3, color="light"),
-        dbc.Card(card_content_3, color="light"),
-        dbc.Card(card_content_3, color="light"),
-        dbc.Card(card_content_3, color="light"),
-        dbc.Card(card_content_3, color="light"),
-        dbc.Card(card_content_3, color="light"),
-    ]
+        dbc.Card(card_content_4, color="light"),
+        dbc.Card(card_content_5, color="light"),
+        dbc.Card(card_content_6, color="light"),
+        dbc.Card(card_content_7, color="light"),
+    ], className="mt-4"
 )
 
 
