@@ -415,5 +415,5 @@ def render_page_content(pathname, data):
 
 
 if __name__ == '__main__':
-    ##app.run_server(debug=False, port=8080, host="0.0.0.0")
-    app.run_server(debug=True, port=3500)
+    app.run_server(debug=False, port=8080, host="0.0.0.0")
+    ##app.run_server(debug=True, port=3500)
