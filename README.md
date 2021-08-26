@@ -11,3 +11,6 @@ Run the `python3 app.py` command on the shell, then open localhost at 8080 port 
 ### Requirements
 At leas 8Gb RAM to execute the model prediction propertly 
 Python3 Installed locally
+
+
+![alt text](images/minitic_logo.png "Logo Title Text 1")
