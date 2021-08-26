@@ -2,14 +2,11 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
-import plotly.express as px
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-import pandas as pd
-import RF_new
+import HelpComponent
 import joblib
-import flask
-
+import  RF_new 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
@@ -165,7 +162,7 @@ ticket_solver = html.Div(
 )
 
 
-help_window = html.Div(id="help-window", children="help window")
+help_window = HelpComponent.component
 
 # content accesor
 content = html.Div(id="page-content", children=[], style=CONTENT_STYLE)
@@ -205,7 +202,6 @@ def toggle_modal(n1, n2, is_open):
 # render components
 
 
-
 @app.callback(
     Output("page-content", "children"),
     [Input("url", "pathname")],
@@ -218,42 +214,60 @@ def render_page_content(pathname, data):
 
     elif pathname == "/suggestions":
         # model intervention
-        loc = "descripciones_tickets_preprocess.csv"
-        print("csv saved")
-        model =  joblib.load("./model.joblib")
-        print("model saved")
+        # loc = "descripciones_tickets_preprocess.csv"
+        # print("csv saved")
+        # model =  joblib.load("./model.joblib")
+        # print("model saved")
+        # description = data.get("description")
+        # print(f"{description} saved")
+        # df = RF_new.make_pred(loc, [description], model)
+        # print("df saved")
+
+        # categories = []
+
+        # for i in range(0, 3):
+        #     key = df.iloc[i].name
+        #     value = df.iloc[i][0]*100
+
+        #     if value <= 30:
+        #         confidence = 'Low'
+        #         color = 'bg-danger'
+        #     elif value > 30 and value <= 70:
+        #         confidence = 'Normal'
+        #         color = 'bg-warning'
+        #     elif value > 70:
+        #         confidence = 'High'
+        #         color = 'bg-success'
+
+            # sub = [key, value, confidence, color]
+            # categories.append(sub)
+
         description = data.get("description")
-        print(f"{description} saved")
-        df = RF_new.make_pred(loc, [description], model)
-        print("df saved")
-
-        categories = []
-
-        for i in range(0, 3):
-            key = df.iloc[i].name
-            value = df.iloc[i][0]*100
-
-            if value <= 30:
-                confidence = 'Low'
-                color = 'bg-danger'
-            elif value > 30 and value <= 70:
-                confidence = 'Normal'
-                color = 'bg-warning'
-            elif value > 70:
-                confidence = 'High'
-                color = 'bg-success'
-
-            sub = [key, value, confidence, color]
-            categories.append(sub)
+        categories = [
+            ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
+            ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
+            ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
+        ]
 
         return [html.Div(
             [
                 # section title
                 html.H1("Suggested Solutions", className="mb-4"),
 
+
+
                 # suggestions
                 html.Div(
                     [
+                        # Entry
+                        html.Div([
+                            dbc.Card([
+                                dbc.CardBody([
+                                    html.H5("Your Entry"),
+                                    html.P(f"{description}")],
+                                    className="col"), ], className="row align-items-center"), ],
+                                 className="container", style={"padding-bottom": "1%"}),
+
                         # CARD
                         dbc.Card(
                             # cuerpo de la Card
@@ -302,13 +316,13 @@ def render_page_content(pathname, data):
                                                             html.Td(
                                                                 f"{categories[0][0]}"),
                                                             html.Td(
-                                                                f"{categories[0][1]}%"),
+                                                                f"{int(categories[0][1])}%"),
                                                             html.Td(
                                                                 [
                                                                     html.Div(
                                                                         html.P(
                                                                             f"{categories[0][2]}"),
-                                                                        className=f"text-light rounded {categories[0][3]} w-50 justify-content-center"
+                                                                        className=f"text-light rounded {categories[0][3]} w-50 justify-content-center col-md-auto"
                                                                     ),
                                                                 ],
                                                             ),
@@ -319,13 +333,13 @@ def render_page_content(pathname, data):
                                                             html.Td(
                                                                 f"{categories[1][0]}"),
                                                             html.Td(
-                                                                f"{categories[1][1]}%"),
+                                                                f"{int(categories[1][1])}%"),
                                                             html.Td(
                                                                 [
                                                                     html.Div(
                                                                         html.P(
                                                                             f"{categories[1][2]}"),
-                                                                        className=f"text-light rounded {categories[1][3]} w-50 justify-content-center"
+                                                                        className=f"text-light rounded {categories[1][3]} w-50 justify-content-center col-md-auto"
                                                                     ),
                                                                 ],
                                                             ),
@@ -336,13 +350,13 @@ def render_page_content(pathname, data):
                                                             html.Td(
                                                                 f"{categories[2][0]}"),
                                                             html.Td(
-                                                                f"{categories[2][1]}%"),
+                                                                f"{int(categories[2][1])}%"),
                                                             html.Td(
                                                                 [
                                                                     html.Div(
                                                                         html.P(
                                                                             f"{categories[2][2]}"),
-                                                                        className=f"text-light rounded {categories[2][3]} w-50 justify-content-center"
+                                                                        className=f"text-light rounded {categories[2][3]} w-50 justify-content-center col-md-auto"
                                                                     ),
                                                                 ],
                                                             ),
@@ -365,7 +379,18 @@ def render_page_content(pathname, data):
                     ],
                     className=""
                 ),
-                dbc.Button("Back", color="primary", block=True, href="/", className="pt-2")
+                html.Div(
+                    [
+                        dbc.Button("Back",
+                                   id="submit-val",
+                                   color="primary",
+                                   className="mr-1 w-50",
+                                   href="/",
+                                   n_clicks=0,
+                                   style={"border-radius": "20px"}),
+                    ],
+                    className="d-flex justify-content-center pt-2"
+                ),
             ],
             className=""
         )
@@ -385,4 +410,5 @@ def render_page_content(pathname, data):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False, port=8080, host="0.0.0.0")
+    ##app.run_server(debug=False, port=8080, host="0.0.0.0")
+    app.run_server(debug=True, port=3500)
