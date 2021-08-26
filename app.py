@@ -219,40 +219,40 @@ def render_page_content(pathname, data):
 
     elif pathname == "/suggestions":
         # model intervention
-        # loc = "descripciones_tickets_preprocess.csv"
-        # print("csv saved")
-        # model =  joblib.load("./model.joblib")
-        # print("model saved")
-        # description = data.get("description")
-        # print(f"{description} saved")
-        # df = RF_new.make_pred(loc, [description], model)
-        # print("df saved")
-
-        # categories = []
-
-        # for i in range(0, 3):
-        #     key = df.iloc[i].name
-        #     value = df.iloc[i][0]*100
-
-        #     if value <= 30:
-        #         confidence = 'Low'
-        #         color = 'bg-danger'
-        #     elif value > 30 and value <= 70:
-        #         confidence = 'Normal'
-        #         color = 'bg-warning'
-        #     elif value > 70:
-        #         confidence = 'High'
-        #         color = 'bg-success'
-
-            # sub = [key, value, confidence, color]
-            # categories.append(sub)
-
+        loc = "descripciones_tickets_preprocess.csv"
+        print("csv saved")
+        model =  joblib.load("./model.joblib")
+        print("model saved")
         description = data.get("description")
-        categories = [
-            ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
-            ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
-            ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
-        ]
+        print(f"{description} saved")
+        df = RF_new.make_pred(loc, [description], model)
+        print("df saved")
+
+        categories = []
+
+        for i in range(0, 3):
+            key = df.iloc[i].name
+            value = df.iloc[i][0]*100
+
+            if value <= 30:
+                confidence = 'Low'
+                color = 'bg-danger'
+            elif value > 30 and value <= 70:
+                confidence = 'Normal'
+                color = 'bg-warning'
+            elif value > 70:
+                confidence = 'High'
+                color = 'bg-success'
+
+            sub = [key, value, confidence, color]
+            categories.append(sub)
+
+        # description = data.get("description")
+        # categories = [
+        #     ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
+        #     ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
+        #     ['Categoria Predicha', 90.6989878, 'high', 'bg-success'],
+        # ]
 
         return [html.Div(
             [
