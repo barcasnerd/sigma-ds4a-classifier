@@ -62,9 +62,9 @@ sidebar = html.Div(
         ),
         dbc.Nav(
             [
-                dbc.NavLink("Entry", href="/", active="exact"),
-                dbc.NavLink("Suggestions", href="/page-1", active="exact"),
-                dbc.NavLink("Overview", href="/page-2", active="exact"),
+                dbc.NavLink("Entry", href="ec2-3-13-114-31.us-east-2.compute.amazonaws.com", active="exact"),
+                dbc.NavLink("Suggestions", href="ec2-3-13-114-31.us-east-2.compute.amazonaws.com", active="exact"),
+                dbc.NavLink("Overview", href="ec2-3-13-114-31.us-east-2.compute.amazonaws.com", active="exact"),
             ],
             vertical=True,
             pills=True,
@@ -168,7 +168,7 @@ ticket_solver=html.Div(
             ),
              html.Div(
                  [
-                     dbc.Button("Classify and Solve", color="primary", className="mr-1 w-50", style={"border-radius":"20px"}),
+                     dbc.Button("Classify and Solve", href="ec2-3-13-114-31.us-east-2.compute.amazonaws.com", color="primary", className="mr-1 w-50", style={"border-radius":"20px"}),
                  ],
                  className="d-flex justify-content-center"
              ),
@@ -497,6 +497,8 @@ suggestions=html.Div(
     className=""
 )
 
+
+
 @app.callback(
     Output("page-content", "children"),
     [Input("url", "pathname")]
@@ -505,12 +507,6 @@ def render_page_content(pathname):
     if pathname == "/":
         return [ticket_solver]
 
-    elif pathname == "/page-1":
-        return [suggestions]
-
-    elif pathname == "/page-2":
-        return [overview]
-    # If the user tries to reach a different page, return a 404 message
     return dbc.Jumbotron(
         [
             html.H1("404: Not found", className="text-danger"),
