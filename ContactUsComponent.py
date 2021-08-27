@@ -28,7 +28,7 @@ card_content_2 = [
         [
             html.H5("Julián Martínez", className="card-title"),
             html.P(
-                "Statistics Student at Pontificia Universidad Javeriana",
+                "Statistics Student at Universidad Nacional",
                 className="card-text",
             ),
             dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/julian-santiago-martinez"),
