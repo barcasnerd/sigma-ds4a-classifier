@@ -13,7 +13,7 @@ card_content_1 = [
         [
             html.H5("Catalina Escobar", className="card-title"),
             html.P(
-                "Computer Scientist and Database",
+                "Computer Scientist and Database Expert at Leonisa",
                 className="card-text",
             ),
             
@@ -59,7 +59,7 @@ card_content_4 = [
         [
             html.H5("Jair Barcasnegras", className="card-title"),
             html.P(
-                "Computer Science Student at Universidad del, TI assistant and freelancer developer",
+                "Computer Science Student at Universidad del Norte, IT Support assistant and freelancer developer",
                 className="card-text",
             ),
             
