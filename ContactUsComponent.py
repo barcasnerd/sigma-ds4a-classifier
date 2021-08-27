@@ -8,12 +8,12 @@ from dash.exceptions import PreventUpdate
 
 
 card_content_1 = [
-    dbc.CardImg(src="""https://s3.amazonaws.com/uploads.use1.cloud.rocket.chat/L9bLyLzJWyZRmfo8p/avatars/FNh8pS5RpitWm8pjk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAILPK6SHTK5RJZLHQ%2F20210826%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210826T091520Z&X-Amz-Expires=120&X-Amz-Signature=cc6e8ccc616d8d538f8ada3dacf6a179b20bf846a6e1627a64379024c2d94f92&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22catalinaej22-gmail.com%22""", top=True, className="rounded-circle"),
+    dbc.CardImg(src="""https://raw.githubusercontent.com/barcasnerd/sigma-ds4a-classifier/jair-changes/images/ce.jpg""", top=True, className="rounded-circle"),
     dbc.CardBody(
         [
             html.H5("Catalina Escobar", className="card-title"),
             html.P(
-                "Computer Scientist and Database expert at Leonisa",
+                "Computer Scientist and Database",
                 className="card-text",
             ),
             dbc.Button("More Info", color="primary", className="fixed-bottom"),
@@ -23,7 +23,7 @@ card_content_1 = [
 
 
 card_content_2 = [
-    dbc.CardImg(src="https://s3.amazonaws.com/uploads.use1.cloud.rocket.chat/L9bLyLzJWyZRmfo8p/avatars/ZcMCjuJSKBimiCjPK?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAILPK6SHTK5RJZLHQ%2F20210826%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210826T100037Z&X-Amz-Expires=120&X-Amz-Signature=184b7363d36a2bb1055e694071dadce820f325696ea4303d88d724227a7c6a27&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22juliansantiago99-gmail.com%22", top=True, className="rounded-circle"),
+    dbc.CardImg(src="https://raw.githubusercontent.com/barcasnerd/sigma-ds4a-classifier/jair-changes/images/jm.jpg", top=True, className="rounded-circle"),
     dbc.CardBody(
         [
             html.H5("Julián Martínez", className="card-title"),
@@ -31,7 +31,7 @@ card_content_2 = [
                 "Statistics Student at Pontificia Universidad Javeriana",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", className="fixed-bottom"),
+            dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/julian-santiago-martinez"),
         ]
     ),
 ]
@@ -121,7 +121,7 @@ card_content_8 = [
 ]
 
 card_content_9 = [
-    dbc.CardImg(src="""https://s3.amazonaws.com/uploads.use1.cloud.rocket.chat/L9bLyLzJWyZRmfo8p/avatars/8sSuLtXmDLHHyrX7r?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAILPK6SHTK5RJZLHQ%2F20210826%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210826T091208Z&X-Amz-Expires=120&X-Amz-Signature=5bc627a206d56bcb8e6d3e26e6bf2ce1bb093c6ee0a6047914d90041a51abc3b&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22a.rosas-correlation-one.com%22""", top=True, className="rounded-circle"),
+    dbc.CardImg(src="https://raw.githubusercontent.com/barcasnerd/sigma-ds4a-classifier/jair-changes/images/ac.jpg", top=True, className="rounded-circle"),
     dbc.CardBody(
         [
             html.H5("Andrés Caballero", className="card-title"),
