@@ -19,6 +19,7 @@ card_content_1 = [
             dbc.Button("More Info", color="primary"),
         ]
     ),
+    dbc.Button("More Info", color="primary"),
 ]
 
 
