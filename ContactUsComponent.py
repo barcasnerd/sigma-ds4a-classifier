@@ -16,7 +16,7 @@ card_content_1 = [
                 "Computer Scientist and Database",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", className="fixed-bottom"),
+            dbc.Button("More Info", color="primary"),
         ]
     ),
 ]
