@@ -16,7 +16,7 @@ card_content_1 = [
                 "Computer Scientist and Database",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary"),
+            
         ]
     ),
     dbc.Button("More Info", color="primary"),
@@ -32,9 +32,10 @@ card_content_2 = [
                 "Statistics Student at Universidad Nacional",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/julian-santiago-martinez"),
+            
         ]
     ),
+    dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/julian-santiago-martinez"),
 ]
 
 card_content_3 = [
@@ -46,9 +47,10 @@ card_content_3 = [
                 "Msc on Industrial Engineering at Universidad Industrial de Santander.",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/david-esteban-puentes-garzon-042568aa/"),
+            
         ]
     ),
+    dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/david-esteban-puentes-garzon-042568aa/"),
 ]
 
 card_content_4 = [
@@ -60,9 +62,10 @@ card_content_4 = [
                 "Computer Science Student at Universidad del, TI assistant and freelancer developer",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/jair-barcasnegras-estrada-20085517b"),
+            
         ]
     ),
+    dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/jair-barcasnegras-estrada-20085517b"),
 ]
 
 card_content_5 = [
@@ -74,9 +77,10 @@ card_content_5 = [
                 "Mechanical Engineer Specialist in Production and Operations Management Magister in Industrial Engineering.",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/raul-arguello/"),
+           
         ]
     ),
+     dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/raul-arguello/"),
 ]
 
 card_content_6 = [
@@ -102,9 +106,10 @@ card_content_7 = [
                 "Business administrator with a focus on project management and Data Analyst at Experimentality and EAFIT university",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/gvasque6"),
+            
         ]
     ),
+    dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/gvasque6"),
 ]
 
 card_content_8 = [
@@ -116,9 +121,10 @@ card_content_8 = [
                 "Doctoral Researcher at IMT Atlantique. Assistant Professor at Colombiam School of Engineering",
                 className="card-text",
             ),
-            dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/wegalfonso"),
+           
         ]
     ),
+     dbc.Button("More Info", color="primary", href="https://www.linkedin.com/in/wegalfonso"),
 ]
 
 card_content_9 = [
@@ -127,7 +133,7 @@ card_content_9 = [
         [
             html.H5("Andrés Caballero", className="card-title"),
             html.P(
-                "Data Science experto and Teacher Assistant for Correletion One Data Science For All Colombian program",
+                "Data Science expert and Teacher Assistant for Correletion One Data Science For All Colombian program",
                 className="card-text",
             ),
             
