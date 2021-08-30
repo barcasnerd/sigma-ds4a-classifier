@@ -9,7 +9,7 @@ Run the `python3 app.py` command on the shell and see the link below to access t
 **Note:** You can change the connection setting (**host** and the **port**) at the final section. 
 
 ### Requirements
-At leas 8GB of local machine RAM to execute the model prediction propertly to avoid a prolonged a time execution 
+At leas 16GB of local machine RAM to execute the model prediction propertly to avoid a prolonged a time execution 
 > Python3 and Pip3 Installed locally
 
 
