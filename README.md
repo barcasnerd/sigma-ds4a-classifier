@@ -4,6 +4,19 @@
 ### Instalation
 Clone the repository from *master* branch using the `git clone` +  repository link, then install all requirements with `pip install -r requirements.txt`.
 
+### Structure
+- **assets:** This folder contains the web icon for the application.
+- **images:** Contains reference images used along the project.
+- **.gitignore:** This is a GitHub file configuration.
+- **ContactUsComponent.py:** Contains the window for all contributors information. In this case contributors are the team members of the project.
+- **HelpComponent.py:** Contains the window for a user manual guidance.
+- **Procfile:** It is a server configuration file for cloud services.
+- **RF_new.py:** In this file you will find the raw prediction model (The prediction uses the Random Forest model).
+- **app.py:** The main file which contains the application running.
+- **descripciones_tickets_preprocess.csv:** The main database.
+- **model.joblib:** The Random Forest model compressed.
+- **requirements.txt:** Content the requirement list for python applications.
+
 ### Usage
 Run the `python3 app.py` command on the shell and see the link below to access the application in your browser.
 **Note:** You can change the connection setting (**host** and the **port**) at the final section. 
