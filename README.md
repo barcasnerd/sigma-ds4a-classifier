@@ -19,6 +19,7 @@ Clone the repository from *master* branch using the `git clone` +  repository li
 
 ### Usage
 Run the `python3 app.py` command on the shell and see the link below to access the application in your browser.
+
 **Note:** ⚠ You can change the connection setting (**host** and the **port**) at the final section if the server default configuration doesn't work on your local machine. ⚠ 
 
 ### Requirements
